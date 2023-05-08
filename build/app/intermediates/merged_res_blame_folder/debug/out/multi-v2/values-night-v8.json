@@ -4,7 +4,7 @@
             "outputFile": "com.example.easy_shopp.app-mergeDebugResources-9:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "D:\\project\\Personal\\easy_shopp\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\project\\Personal\\Flutter\\easy_shopp\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
