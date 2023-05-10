@@ -1,3 +1,4 @@
+import 'package:easy_shopp/Provider/products.dart';
 import 'package:easy_shopp/Provider/root_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_shopp/View/Dashboard/product_detail_screen.dart';
@@ -9,8 +10,7 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loadedProductData = Provider.of<Root_provider>(context);
-    final loadedProduct = loadedProductData.loadedProduct;
+    final product = Provider.of<Product>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -20,14 +20,24 @@ class ProductItem extends StatelessWidget {
               icon: const Icon(Icons.shopping_bag),
               onPressed: () {},
             ),
-            leading: IconButton(
-              color: Theme.of(context).colorScheme.secondary,
-              icon: const Icon(Icons.favorite),
-              onPressed: () {},
+            leading: Consumer<Product>(
+              builder: (context, product, _) => IconButton(
+                color: Colors.grey,
+                icon: product.isFavorite
+                    ? Icon(
+                        Icons.favorite,
+                        color: Colors.red,
+                        size: 30,
+                      )
+                    : Icon(Icons.favorite_border),
+                onPressed: () {
+                  product.toggleFavoriteStatus();
+                },
+              ),
             ),
             backgroundColor: Colors.black54,
             title: Text(
-              loadedProduct[index].title,
+              product.title,
               textAlign: TextAlign.center,
             ),
           ),
@@ -35,14 +45,14 @@ class ProductItem extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ProductDetail(
-                  title: loadedProduct[index].title,
-                  id: loadedProduct[index].id,
-                  imageUrl: loadedProduct[index].imageUrl,
+                  title: product.title,
+                  id: product.id,
+                  imageUrl: product.imageUrl,
                 ),
               ));
             },
             child: Image.network(
-              loadedProduct[index].imageUrl,
+              product.imageUrl,
               fit: BoxFit.cover,
             ),
           )),
