@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 
 import '../../Provider/products.dart';
 
+enum FilterOption { Favorites, All }
+
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
 
@@ -16,9 +18,32 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     final Data = Provider.of<Root_provider>(context);
-    final lengthlist = Data.loadedProduct.length;
+    final ListOfItem = Data.loadedProduct;
+    final lengthlist = ListOfItem.length;
+
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          PopupMenuButton(
+            onSelected: (FilterOption selectedvalue) {
+              if (selectedvalue == FilterOption.Favorites) {
+                Data.FavoriteProductItem();
+              } else {
+                Data.AllProduct();
+              }
+            },
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                child: Text('Only Favorites'),
+                value: FilterOption.Favorites,
+              ),
+              PopupMenuItem(
+                child: Text('All Item'),
+                value: FilterOption.All,
+              )
+            ],
+          )
+        ],
         title: Text('Dashboard'),
       ),
       body: GridView.builder(
@@ -30,10 +55,8 @@ class _DashboardState extends State<Dashboard> {
               mainAxisSpacing: 10,
               childAspectRatio: 3 / 2),
           itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-                value: Data.loadedProduct[i],
-                child: ProductItem(
-                  index: i,
-                ),
+                value: ListOfItem[i],
+                child: const ProductItem(),
               )),
     );
   }

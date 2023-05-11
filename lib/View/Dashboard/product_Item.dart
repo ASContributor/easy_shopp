@@ -5,8 +5,7 @@ import 'package:easy_shopp/View/Dashboard/product_detail_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProductItem extends StatelessWidget {
-  final int index;
-  const ProductItem({super.key, required this.index});
+  const ProductItem({super.key});
 
   @override
   Widget build(BuildContext context) {

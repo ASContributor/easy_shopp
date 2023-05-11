@@ -36,8 +36,24 @@ class Root_provider with ChangeNotifier {
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
   ];
-
+  var _showOnlyFavorite = false;
   List<Product> get loadedProduct {
-    return [..._loadedProduct];
+    if (_showOnlyFavorite == false) {
+      return [..._loadedProduct];
+    } else {
+      return _loadedProduct
+          .where((element) => element.isFavorite == true)
+          .toList();
+    }
+  }
+
+  void FavoriteProductItem() {
+    _showOnlyFavorite = true;
+    notifyListeners();
+  }
+
+  void AllProduct() {
+    _showOnlyFavorite = false;
+    notifyListeners();
   }
 }
