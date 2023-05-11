@@ -15,10 +15,12 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  var _showonlyfavorite = false;
   @override
   Widget build(BuildContext context) {
     final Data = Provider.of<Root_provider>(context);
-    final ListOfItem = Data.loadedProduct;
+    final ListOfItem =
+        _showonlyfavorite ? Data.onlyFavorite : Data.loadedProduct;
     final lengthlist = ListOfItem.length;
 
     return Scaffold(
@@ -26,11 +28,15 @@ class _DashboardState extends State<Dashboard> {
         actions: <Widget>[
           PopupMenuButton(
             onSelected: (FilterOption selectedvalue) {
-              if (selectedvalue == FilterOption.Favorites) {
-                Data.FavoriteProductItem();
-              } else {
-                Data.AllProduct();
-              }
+              setState(() {
+                if (selectedvalue == FilterOption.Favorites) {
+                  _showonlyfavorite = true;
+                  // Data.FavoriteProductItem();
+                } else {
+                  _showonlyfavorite = false;
+                  // Data.AllProduct();
+                }
+              });
             },
             itemBuilder: (_) => [
               PopupMenuItem(
