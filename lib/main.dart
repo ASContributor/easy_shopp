@@ -1,3 +1,4 @@
+import 'package:easy_shopp/Provider/cart_provider.dart';
 import 'package:easy_shopp/Provider/root_provider.dart';
 import 'package:easy_shopp/View/Dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => Root_provider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => Root_provider(),
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => CartProvider(),
+        ),
+      ],
       child: MaterialApp(
           theme: ThemeData(
               colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.brown)

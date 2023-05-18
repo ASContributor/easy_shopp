@@ -1,5 +1,7 @@
+import 'package:easy_shopp/Provider/cart_provider.dart';
 import 'package:easy_shopp/Provider/root_provider.dart';
 import 'package:easy_shopp/View/Dashboard/product_Item.dart';
+import 'package:easy_shopp/View/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,10 +24,20 @@ class _DashboardState extends State<Dashboard> {
     final ListOfItem =
         _showonlyfavorite ? Data.onlyFavorite : Data.loadedProduct;
     final lengthlist = ListOfItem.length;
-
+    final cart = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
+          IconButton(
+              onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const CartScreen(),
+                      ),
+                    )
+                  },
+              icon: Icon(Icons.shopping_cart)),
           PopupMenuButton(
             onSelected: (FilterOption selectedvalue) {
               setState(() {

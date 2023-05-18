@@ -1,3 +1,4 @@
+import 'package:easy_shopp/Provider/cart_provider.dart';
 import 'package:easy_shopp/Provider/products.dart';
 import 'package:easy_shopp/Provider/root_provider.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,22 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
+    final Cart = Provider.of<CartProvider>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
           footer: GridTileBar(
-            trailing: IconButton(
-              color: Theme.of(context).colorScheme.secondary,
-              icon: const Icon(Icons.shopping_bag),
-              onPressed: () {},
+            trailing: Consumer<CartProvider>(
+              builder: (ctx, Cart, child) => IconButton(
+                color: Theme.of(context).colorScheme.secondary,
+                icon: const Icon(Icons.shopping_bag),
+                onPressed: () {
+                  Cart.addItem(
+                      productId: product.id,
+                      price: product.price,
+                      title: product.title);
+                },
+              ),
             ),
             leading: Consumer<Product>(
               builder: (context, product, _) => IconButton(
@@ -44,6 +53,7 @@ class ProductItem extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ProductDetail(
+                  price: product.price,
                   title: product.title,
                   id: product.id,
                   imageUrl: product.imageUrl,
