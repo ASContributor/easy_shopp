@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (BuildContext context) => CartProvider(),
         ),
-        ChangeNotifierProvider(create: (BuildContext context) => Order()),
+        ChangeNotifierProvider(
+          create: (BuildContext context) => Order(),
+        ),
       ],
       child: MaterialApp(
           theme: ThemeData(

@@ -1,4 +1,4 @@
-#Wed May 24 15:57:14 IST 2023
+#Wed May 24 17:27:48 IST 2023
 base.0=D\:\\project\\Personal\\Flutter\\easy_shopp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

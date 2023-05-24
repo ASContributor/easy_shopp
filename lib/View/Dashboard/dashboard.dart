@@ -1,7 +1,7 @@
 import 'package:easy_shopp/Provider/cart_provider.dart';
 import 'package:easy_shopp/Provider/root_provider.dart';
-import 'package:easy_shopp/View/Dashboard/product_Item.dart';
-import 'package:easy_shopp/View/cart_screen.dart';
+import 'package:easy_shopp/View/Product/product_Item.dart';
+import 'package:easy_shopp/View/Cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
