@@ -1,4 +1,5 @@
 import 'package:easy_shopp/Provider/cart_provider.dart';
+import 'package:easy_shopp/Provider/orders.dart';
 import 'package:easy_shopp/Provider/root_provider.dart';
 import 'package:easy_shopp/View/Dashboard/dashboard.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (BuildContext context) => CartProvider(),
         ),
+        ChangeNotifierProvider(create: (BuildContext context) => Order()),
       ],
       child: MaterialApp(
           theme: ThemeData(

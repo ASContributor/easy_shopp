@@ -21,6 +21,8 @@ class Order with ChangeNotifier {
   }
 
   void addOrder(List<CartItem> cartProducts, double total) {
+    print('Hear');
+    print(cartProducts[0].price);
     _orders.insert(
         0,
         OrderItem(
@@ -31,6 +33,4 @@ class Order with ChangeNotifier {
         ));
     notifyListeners();
   }
-
-  void clearCart() {}
 }

@@ -4,6 +4,7 @@ import 'package:easy_shopp/Provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Provider/cart_provider.dart';
+import '../Provider/orders.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -11,6 +12,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Cart = Provider.of<CartProvider>(context);
+
     //Map<String, CartItem> Item = Cartitem.Items[0];
     var Item = Cart.list_of_Item;
     return Scaffold(
@@ -37,7 +39,11 @@ class CartScreen extends StatelessWidget {
               children: [
                 Chip(label: Text('Total \$ ${Cart.total_Item_Amount}')),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Provider.of<Order>(context, listen: false)
+                        .addOrder(Item, Cart.total_Item_Amount);
+                    Cart.clearCart();
+                  },
                   child: Text('Order Now'),
                 )
               ],
