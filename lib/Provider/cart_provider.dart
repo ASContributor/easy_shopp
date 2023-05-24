@@ -38,6 +38,11 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearCart() {
+    _Items = {};
+    notifyListeners();
+  }
+
   void addItem({
     required String productId,
     required double price,
