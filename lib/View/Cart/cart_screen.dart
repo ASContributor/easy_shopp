@@ -1,6 +1,7 @@
 import 'dart:ffi';
-
+// ignore_for_file: unnecessary_import, implementation_imports, unused_import, duplicate_import
 import 'package:easy_shopp/Provider/cart_provider.dart';
+import 'package:easy_shopp/View/Order/order.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Provider/cart_provider.dart';
@@ -43,6 +44,10 @@ class CartScreen extends StatelessWidget {
                     Provider.of<Order>(context, listen: false)
                         .addOrder(Item, Cart.total_Item_Amount);
                     Cart.clearCart();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const OrderScreen()));
                   },
                   child: const Text('Order Now'),
                 )

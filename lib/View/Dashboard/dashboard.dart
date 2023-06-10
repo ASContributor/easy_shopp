@@ -1,10 +1,12 @@
 import 'package:easy_shopp/Provider/cart_provider.dart';
+import 'package:easy_shopp/Provider/orders.dart';
 import 'package:easy_shopp/Provider/root_provider.dart';
+import 'package:easy_shopp/View/Order/order.dart';
 import 'package:easy_shopp/View/Product/product_Item.dart';
 import 'package:easy_shopp/View/Cart/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+// ignore_for_file: unnecessary_import, implementation_imports, unused_import, duplicate_import
 import '../../Provider/products.dart';
 
 enum FilterOption { Favorites, All }
@@ -26,6 +28,29 @@ class _DashboardState extends State<Dashboard> {
     final lengthlist = ListOfItem.length;
     final cart = Provider.of<CartProvider>(context);
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+                decoration: BoxDecoration(color: Colors.blueGrey),
+                child: Text('Profile')),
+            ListTile(
+              title: Text('Profile'),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('My Order'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderScreen(),
+                    ));
+              },
+            )
+          ],
+        ),
+      ),
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
@@ -37,7 +62,7 @@ class _DashboardState extends State<Dashboard> {
                       ),
                     )
                   },
-              icon: Icon(Icons.shopping_cart)),
+              icon: const Icon(Icons.shopping_cart)),
           PopupMenuButton(
             onSelected: (FilterOption selectedvalue) {
               setState(() {
@@ -51,18 +76,18 @@ class _DashboardState extends State<Dashboard> {
               });
             },
             itemBuilder: (_) => [
-              PopupMenuItem(
+              const PopupMenuItem(
                 child: Text('Only Favorites'),
                 value: FilterOption.Favorites,
               ),
-              PopupMenuItem(
+              const PopupMenuItem(
                 child: Text('All Item'),
                 value: FilterOption.All,
               )
             ],
           )
         ],
-        title: Text('Dashboard'),
+        title: const Text('Dashboard'),
       ),
       body: GridView.builder(
           padding: const EdgeInsets.all(10.0),
